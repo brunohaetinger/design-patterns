@@ -41,3 +41,5 @@ class ToyotaCamry extends Automotor {
 
 console.log(new ToyotaCorolla().assembly());
 console.log(new ToyotaCamry().assembly());
+
+export default Automotor;
