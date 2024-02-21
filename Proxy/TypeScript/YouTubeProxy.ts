@@ -66,31 +66,27 @@ class CachedYouTubeSDK implements YouTubeSDKLib{
 
 
 // main
-function main(){
+async function main(){
   const youtubeSDK = new YouTubeSDK();
   const cachedSDK = new CachedYouTubeSDK(youtubeSDK);
   
   
   console.log('Youtube SDK - common');
   console.time('Normal SDK');
-  youtubeSDK.downloadVideo('foo').then((video)=>{
-    console.log('Result: ', video);
-    console.timeEnd('Normal SDK');
-  })
-
+  const sdkResponse = await youtubeSDK.downloadVideo('foo');
+  console.log('Result: ', sdkResponse);
+  console.timeEnd('Normal SDK');
 
   console.log('Youtube SDK - Cached 1');
   console.time('Cached SDK 1');
-  cachedSDK.downloadVideo('foo').then((video)=>{
-    console.log('Result: ', video);
+  const cachedSdkResponse1 = await cachedSDK.downloadVideo('foo')
+    console.log('Result: ', cachedSdkResponse1);
     console.timeEnd('Cached SDK 1');
-  })
-
-  console.log('Youtube SDK - Cached 2');
-  console.time('Cached SDK 2');
-  cachedSDK.downloadVideo('foo').then((video)=>{
-    console.log('Result: ', video);
+  
+    console.log('Youtube SDK - Cached 2');
+    console.time('Cached SDK 2');
+    const cachedSdkResponse2 = await cachedSDK.downloadVideo('foo');
+    console.log('Result: ', cachedSdkResponse2);
     console.timeEnd('Cached SDK 2');
-  })
 };
 main();
